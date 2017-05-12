@@ -98,10 +98,13 @@ def tree_search(problem, fringe):
     The argument fringe should be an empty queue.
     Don't worry about repeFIFOQueueated paths to a state. [Fig. 3.8]"""
     fringe.append(Node(problem.initial))
+    count=0
     while fringe:
         node = fringe.pop()
         if problem.goal_test(node.state):
+            print count
             return node
+        count+=1
         fringe.extend(node.expand(problem))
     return None
 
@@ -173,7 +176,7 @@ def depth_first_graph_search(problem):
     return graph_search(problem, Stack())
 
 def branch_graph_search(problem):
-    return branch_search(problem,CostQueue())
+    return tree_search(problem,CostQueue())
 
 def branch_tree_search(problem):
     return tree_h_search(problem,CostHeuQueue())
